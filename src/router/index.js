@@ -1,20 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import EventList from '@/views/EventList.vue'
-import AboutView from '@/views/AboutView.vue'
-import EventDetails from '@/views/event/Details.vue'
-import EventEdit from '@/views/event/Edit.vue'
-import EventRegister from '@/views/event/Register.vue'
-import EventLayout from '@/views/event/Layout.vue'
-import NotFound from '@/views/NotFound.vue'
-import NetworkError from '@/views/NetworkError.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior(to, from, savedPosition) {
+    console.log(savedPosition)
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
+  },
   routes: [
     {
       path: '/',
       name: 'EventList',
-      component: EventList,
+      component: () => import('@/views/EventList.vue'),
       props: (route) => {
         return { page: parseInt(route.query.page) || 1 }
       },
@@ -22,28 +22,28 @@ const router = createRouter({
     {
       path: '/about-us',
       name: 'About',
-      component: AboutView,
+      component: () => import('@/views/AboutView.vue'),
     },
     {
       path: '/events/:id',
       name: 'EventLayout',
       props: true,
-      component: EventLayout,
+      component: () => import('@/views/event/Layout.vue'),
       children: [
         {
           path: '',
           name: 'EventDetails',
-          component: EventDetails,
+          component: () => import('@/views/event/Details.vue'),
         },
         {
           path: 'register',
           name: 'EventRegister',
-          component: EventRegister,
+          component: () => import('@/views/event/Register.vue'),
         },
         {
           path: 'edit',
           name: 'EventEdit',
-          component: EventEdit,
+          component: () => import('@/views/event/Edit.vue'),
         },
       ],
     },
@@ -76,18 +76,18 @@ const router = createRouter({
     {
       path: '/404/:resource',
       name: '404Resource',
-      component: NotFound,
+      component: () => import('@/views/NotFound.vue'),
       props: true,
     },
     {
       path: '/network-error',
       name: 'NetworkError',
-      component: NetworkError,
+      component: () => import('@/views/NetworkError.vue'),
     },
     {
       path: '/:catchAll(.*)',
       name: 'NotFound',
-      component: NotFound,
+      component: () => import('@/views/NotFound.vue'),
     },
   ],
 })
