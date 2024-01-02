@@ -30,8 +30,11 @@ onMounted(() => {
       event.value = response.data
     })
     .catch((error) => {
-      console.log(error)
-      router.push({ name: '404Resource', params: { resource: 'event' } })
+      if (error.response && error.response.status === 404) {
+        router.push({ name: '404Resource', params: { resource: 'event' } })
+      } else {
+        router.push({ name: 'NetworkError' })
+      }
     })
 })
 </script>
