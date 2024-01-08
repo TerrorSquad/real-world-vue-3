@@ -1,14 +1,20 @@
-<script setup>
+<script setup lang="ts">
+import type { Ref } from 'vue'
+
 import EventCard from '@/components/EventCard.vue'
 import { ref, onMounted, computed, watchEffect } from 'vue'
-import EventService from '@/services/EventService'
+import EventService from '@/services/EventService.js'
 import { useRouter, RouterLink } from 'vue-router'
 const router = useRouter()
 
-const props = defineProps(['page'])
-
-const events = ref(null)
-const totalEvents = ref(0)
+const props = defineProps({
+  page: {
+    type: Number,
+    default: 1,
+  },
+})
+const events: Ref<null | object> = ref(null)
+const totalEvents: Ref<number> = ref(0)
 
 const page = computed(() => props.page)
 const hasNextPage = computed(

@@ -3,7 +3,9 @@
   <p>{{ event.description }}</p>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { defineProps } from 'vue'
+
 const props = defineProps({
   event: {
     type: Object,
