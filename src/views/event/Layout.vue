@@ -17,6 +17,7 @@ import { ref, onMounted, Ref } from 'vue'
 import EventService from '@/services/EventService'
 import router from '@/router'
 import { EventItem } from '@/types'
+import { AxiosResponse, AxiosError } from 'axios'
 
 const event: Ref<EventItem> = ref(null)
 const props = defineProps({
@@ -28,10 +29,10 @@ const props = defineProps({
 
 onMounted(() => {
   EventService.getEvent(props.id)
-    .then((response) => {
+    .then((response: AxiosResponse<EventItem, any>) => {
       event.value = response.data
     })
-    .catch((error) => {
+    .catch((error: AxiosError) => {
       if (error.response && error.response.status === 404) {
         router.push({ name: '404Resource', params: { resource: 'event' } })
       } else {

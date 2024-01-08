@@ -3,9 +3,10 @@ import type { Ref } from 'vue'
 
 import EventCard from '@/components/EventCard.vue'
 import { ref, onMounted, computed, watchEffect, PropType } from 'vue'
-import EventService from '@/services/EventService.js'
+import EventService from '@/services/EventService'
 import { useRouter, RouterLink } from 'vue-router'
 import { EventItem } from '@/types'
+import { AxiosResponse } from 'axios'
 const router = useRouter()
 
 const props = defineProps({
@@ -25,7 +26,7 @@ onMounted(() => {
   watchEffect(() => {
     events.value = null
     EventService.getEvents(2, page.value)
-      .then((response) => {
+      .then((response: AxiosResponse<EventItem[]>) => {
         events.value = response.data
         totalEvents.value = response.headers['x-total-count']
       })
