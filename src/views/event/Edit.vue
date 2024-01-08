@@ -2,8 +2,8 @@
   <p>Edit the event here</p>
 </template>
 
-<script setup>
-const props = defineProps({
+<script setup lang="ts">
+defineProps({
   event: {
     type: Object,
     required: true,

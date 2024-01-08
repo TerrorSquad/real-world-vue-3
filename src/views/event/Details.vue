@@ -4,10 +4,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
 import type { EventItem } from '@/types'
 
-const props = defineProps({
+defineProps({
   event: {
     type: Object as () => EventItem,
     required: true,

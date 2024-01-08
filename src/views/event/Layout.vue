@@ -12,11 +12,13 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue'
+<script setup lang="ts">
+import { ref, onMounted, Ref } from 'vue'
 import EventService from '@/services/EventService'
 import router from '@/router'
-const event = ref(null)
+import { EventItem } from '@/types'
+
+const event: Ref<EventItem> = ref(null)
 const props = defineProps({
   id: {
     type: String,

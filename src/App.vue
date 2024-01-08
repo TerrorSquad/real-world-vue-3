@@ -1,7 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import { inject } from 'vue'
-const GStore = inject('GStore')
+import { GStoreType } from './types'
+
+const GStore: GStoreType = inject('GStore')
 </script>
 
 <template>

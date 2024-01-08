@@ -2,18 +2,19 @@
 import type { Ref } from 'vue'
 
 import EventCard from '@/components/EventCard.vue'
-import { ref, onMounted, computed, watchEffect } from 'vue'
+import { ref, onMounted, computed, watchEffect, PropType } from 'vue'
 import EventService from '@/services/EventService.js'
 import { useRouter, RouterLink } from 'vue-router'
+import { EventItem } from '@/types'
 const router = useRouter()
 
 const props = defineProps({
   page: {
-    type: Number,
+    type: Object as PropType<number>,
     default: 1,
   },
 })
-const events: Ref<null | object> = ref(null)
+const events: Ref<EventItem[]> = ref(null)
 const totalEvents: Ref<number> = ref(0)
 
 const page = computed(() => props.page)

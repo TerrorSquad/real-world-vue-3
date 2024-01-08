@@ -10,3 +10,7 @@ export interface EventItem {
   time: string
   organizer: string
 }
+
+export interface GStoreType {
+  flashMessage: string
+}

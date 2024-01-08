@@ -1,14 +1,17 @@
-<script setup>
+<script setup lang="ts">
 import router from '@/router'
-import { defineProps, inject } from 'vue'
+import { EventItem } from '@/types'
+import { PropType, inject } from 'vue'
+
+import type { GStoreType } from '@/types'
 
 const props = defineProps({
   event: {
-    type: Object,
+    type: Object as PropType<EventItem>,
     required: true,
   },
 })
-const GStore = inject('GStore')
+let GStore: GStoreType = inject('GStore')
 
 const register = () => {
   // if registration API call is successful
